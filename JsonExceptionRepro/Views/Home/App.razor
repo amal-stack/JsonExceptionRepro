@@ -1,0 +1,42 @@
+﻿@using JsonExceptionRepro.Models
+
+<h3>App</h3>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+        <div class="card">
+            <div class="card-body">
+                @if (Question is null)
+                {
+                    <p>Loading...</p>
+                }
+                else
+                {
+                    <h6>@Question.Text</h6>
+                    <ul class="list-group">
+                        @foreach (var answer in Question.Answers)
+                        {
+                            @if (answer.IsCorrect)
+                            {
+                                <li class="list-group-item list-group-item-success">@answer.Text</li>
+                            }
+                            else
+                            {
+                                <li class="list-group-item">@answer.Text</li>
+                            }
+                        }
+                    </ul>
+                }
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@code {
+
+    [Parameter] public Question Question { get; set; }
+}

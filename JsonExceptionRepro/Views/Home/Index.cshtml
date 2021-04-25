@@ -1,8 +1,18 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
+<div class="jumbotron">
+    <h6>The following are buttons that link to <code>HomeController.ThisWillWork()</code> and <code>HomeController.ThisWillNotWork()</code>. The two actions have just one difference. In the action that doesn't work, I have not set the Question property on any answer, hence it doesn't create a cycle. Both actions return the same View <code>ParentView</code>. <code>ParentView</code> includes a Razor component <code>App.razor</code> and passes its model <code>Question</code> as parameter to the component. </h6>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <p>Adding the following to <code>Startup.cs</code> does nothing:</p>
+    <div>
+        <code>
+            services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+        </code>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <a asp-action="ThisWillWork" class="btn btn-block btn-success">This Will Work</a>
+            <a asp-action="ThisWillNotWork" class="btn btn-block btn-danger">This Will Not Work</a>
+        </div>
+    </div>
 </div>
